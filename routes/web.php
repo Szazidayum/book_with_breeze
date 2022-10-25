@@ -32,6 +32,7 @@ Route::middleware(['auth.basic'])->group(function () {
     Route::apiResource('/api/copies', CopyController::class);
     Route::apiResource('/api/books', BookController::class);
     Route::apiResource('/api/users', UserController::class);
+    Route::apiResource('/api/lendings', LendingController::class);
 
     //view
     Route::get('/copy/new', [CopyController::class, 'newView']);
@@ -46,9 +47,9 @@ Route::middleware(['auth.basic'])->group(function () {
     Route::get('api/lendings', [LendingController::class, 'index']);
     Route::get('api/lendings', [LendingController::class, 'store']);
 });
-Route::apiResource('api/copies', [CopyController::class]);
-Route::apiResource('api/books', [BookController::class]);
-Route::apiResource('api/lendings', [LendingController::class]);
+Route::apiResource('api/copies', CopyController::class);
+Route::apiResource('api/books', BookController::class);
+Route::apiResource('api/lendings', LendingController::class);
 
 
 require __DIR__.'/auth.php';

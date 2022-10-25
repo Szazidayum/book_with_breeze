@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Lending extends Model
 {
     use HasFactory;
-    protected  $primaryKey = ['user_id','copy_id','start'];
 
     protected $fillable = [
         'user_id',
