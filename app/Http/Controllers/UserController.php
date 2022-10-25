@@ -24,12 +24,12 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $User = new User();
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->permission = 1;
-        $User->save();
+        $user->save();
     }
 
     public function update(Request $request, $id)
@@ -39,7 +39,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->permission = $request->permission;
-        $User->save();
+        $user->save();
 
     }
 }
