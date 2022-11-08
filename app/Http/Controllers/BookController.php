@@ -35,4 +35,8 @@ class BookController extends Controller
         $Book->author = $request->author;
         $Book->title = $request->title;
     }
+    public function title_copy($title){
+        $copies = Book::with('book_copy')->where('title','=',$title)->get();
+        return $copies;
+    }
 }

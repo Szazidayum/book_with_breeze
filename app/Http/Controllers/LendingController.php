@@ -6,6 +6,7 @@ use App\Models\Copy;
 use App\Models\Lending;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LendingController extends Controller
 {
@@ -41,7 +42,11 @@ class LendingController extends Controller
         $lending->save();        
      }
 
-
+     public function auth_user_copies(){
+        $user = Auth::user();
+        $copies = Lending::with('lending_user')->where('user_id','=',$user->id)->get();
+        return $copies;
+    }
     public function newView()
     {
         $users = User::all();

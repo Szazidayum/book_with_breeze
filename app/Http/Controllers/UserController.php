@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -42,4 +44,23 @@ class UserController extends Controller
         $user->save();
 
     }
+    public function updatePassword(Request $request, $id)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     "password" => 'string|min:3|max:50'
+        // ]);
+        $validator = Validator::make($request->all(), [
+            "password" => array( 'required', 'regex:/^[a-zA-Z]+\d*$/u')
+                  ]);
+            
+            
+        if ($validator->fails()) {
+            return response()->json(["message" => $validator->errors()->all()], 400);
+        }
+        $user = User::where("id", $id)->update([
+            "password" => Hash::make($request->password),
+        ]);
+        return response()->json(["user" => $user]);
+    }
+
 }
